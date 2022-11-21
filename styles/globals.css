@@ -1,3 +1,66 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+  :root {
+    --window-color: 226 232 240;
+    --main-color: 23 27 37;
+    --primary-color: 185 28 28;
+    --content-color: 17 24 39;
+  }
+
+  html {
+    @apply font-inter bg-window;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-bold text-center;
+  }
+
+  h1 {
+    @apply text-3xl sm:text-4xl;
+  }
+
+  h2 {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl sm:text-2xl;
+  }
+
+  li {
+    @apply w-full flex flex-row items-center gap-4 text-left;
+  }
+
+  ul {
+    @apply text-sm sm:text-base;
+  }
+
+  svg {
+    @apply min-w-fit min-h-fit;
+  }
+}
+
+@layer components {
+  .wrapper {
+    @apply mx-auto w-full max-w-screen-xl flex flex-col px-4 sm:px-8;
+  }
+
+  .link {
+    @apply font-semibold hover:text-primary transition-colors;
+  }
+
+  .btn {
+    @apply bg-primary rounded flex flex-row items-center justify-center gap-2 px-6 py-4 brightness-90 hover:brightness-100 focus:brightness-100 tracking-widest uppercase font-semibold;
+  }
+
+  .btn-xl {
+    @apply px-8 py-6;
+  }
+}
