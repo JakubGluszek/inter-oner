@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Tilt from "react-parallax-tilt";
 import { GiAutoRepair, GiElectric } from "react-icons/gi";
-import { useViewportSize, useWindowScroll } from "@mantine/hooks";
+import { useViewportSize } from "@mantine/hooks";
 import clsx from "clsx";
 
 import "swiper/css";
@@ -32,8 +32,8 @@ const Home: React.FC = () => {
       <Layout header={{ position: "fixed", transparent: true }}>
         <HeroSection servicesRef={servicesRef} />
         <div className="wrapper py-8">
-          <ReviewsSection />
           <ServicesSection servicesRef={servicesRef} />
+          <ReviewsSection />
           <div className="py-8">
             <ContactView />
           </div>
@@ -224,11 +224,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ servicesRef }) => {
   const section = React.useRef<HTMLElement | null>(null);
   const sectionInView = useInView(section, { once: true });
 
-  const [_, scrollTo] = useWindowScroll();
-
   const onReadMore = () => {
     servicesRef.current &&
-      scrollTo({ x: 0, y: servicesRef.current.scrollHeight });
+      servicesRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
   };
 
   return (
