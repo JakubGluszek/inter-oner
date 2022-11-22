@@ -39,13 +39,12 @@ const Header: React.FC<Props> = ({ position, transparent }) => {
       ref={headerRef}
       className={clsx(
         position,
-        "z-[9999] w-full text-window top-0",
+        "z-[9999] w-full text-window top-0 backdrop-blur-md",
         transparent
           ? scroll.y >= (headerHeight ? height - headerHeight : height)
             ? "bg-main/80"
             : "bg-transparent"
-          : "bg-main",
-        scroll.y > 0 && "backdrop-blur-md"
+          : "bg-main"
       )}
     >
       <div className="wrapper">
