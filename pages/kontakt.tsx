@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import Layout from "../components/Layout";
 import { Loader } from "@mantine/core";
+import { useInView } from "framer-motion";
 
 type Inputs = {
   user_name: string;
@@ -44,6 +45,9 @@ const Kontakt: React.FC = () => {
     setLoading(true);
   };
 
+  const section = React.useRef<HTMLElement | null>(null);
+  const sectionInView = useInView(section, { once: true });
+
   return (
     <React.Fragment>
       <Head>
@@ -51,9 +55,16 @@ const Kontakt: React.FC = () => {
       </Head>
 
       <Layout header={{ position: "sticky", transparent: false }}>
-        <section className="py-6 my-auto">
+        <section ref={section} className="py-6 my-auto">
           <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
-            <div className="py-6 md:py-0 md:px-6">
+            <div
+              style={{
+                transform: sectionInView ? "none" : "translateX(-400px)",
+                opacity: sectionInView ? 1 : 0,
+                transition: "all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s",
+              }}
+              className="py-6 md:py-0 md:px-6"
+            >
               <h1 className="text-4xl font-bold">Skontaktuj się</h1>
               <p className="pt-2 pb-4 text-center">
                 Zadzwoń lub napisz maila by umówić się na wizytę w serwisie.
@@ -101,6 +112,11 @@ const Kontakt: React.FC = () => {
             </div>
             <form
               ref={form}
+              style={{
+                transform: sectionInView ? "none" : "translateX(400px)",
+                opacity: sectionInView ? 1 : 0,
+                transition: "all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s",
+              }}
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col py-6 space-y-6 md:py-0 md:px-6 ng-untouched ng-pristine ng-valid"
             >

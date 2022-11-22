@@ -1,8 +1,7 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 import { CgDetailsLess, CgDetailsMore } from "react-icons/cg";
 import { useViewportSize, useWindowScroll } from "@mantine/hooks";
-
 import clsx from "clsx";
 
 import MechanicsIcon from "./icons/MechanicsIcon";
@@ -46,7 +45,7 @@ const Header: React.FC<Props> = ({ position, transparent }) => {
             ? "bg-main/80"
             : "bg-transparent"
           : "bg-main",
-        scroll.y > 0 && "backdrop-blur-sm"
+        scroll.y > 0 && "backdrop-blur-md"
       )}
     >
       <div className="wrapper">
@@ -59,7 +58,7 @@ const Header: React.FC<Props> = ({ position, transparent }) => {
           <span>ul. Bolesława Prusa 10, 43-300 Bielsko-Biała</span>
         </div>
         {/* Navbar itself */}
-        <div className="flex flex-row items-center justify-between py-2">
+        <div className="flex flex-row items-center justify-between py-4">
           {/* Logo */}
           <div className="flex flex-row items-center gap-2">
             <div className="w-8 h-8 text-primary">

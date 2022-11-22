@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
             {/* Contact Info */}
             <div
               id="kontakt"
-              className="w-full lg:w-1/2 h-full p-2 flex flex-col items-center justify-evenly gap-4"
+              className="w-full lg:w-1/2 h-full p-2 flex flex-col items-center justify-evenly gap-4 rounded bg-window/5"
             >
               <span>P.P.U.H. INTER-ONER</span>
               <div className="flex flex-col gap-1 items-center text-center">
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
               </div>
             </div>
             {/* Open hours */}
-            <div className="w-full lg:w-1/2 h-full flex p-2">
+            <div className="w-full lg:w-1/2 h-full flex p-2 rounded bg-window/5">
               <table className="w-full h-fit my-auto">
                 <thead>
                   <tr>

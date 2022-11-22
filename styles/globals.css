@@ -12,6 +12,11 @@
     --content-color: 17 24 39;
   }
 
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
+
   html {
     @apply font-inter bg-window;
   }
@@ -39,7 +44,7 @@
   }
 
   ul {
-    @apply text-sm sm:text-base;
+    @apply text-sm sm:text-base lg:text-lg;
   }
 
   svg {
@@ -62,5 +67,16 @@
 
   .btn-xl {
     @apply px-8 py-6;
+  }
+
+  .diagonal-box {
+    @apply bg-gradient-to-r from-main to-primary skew-y-6;
+  }
+
+  .anchor {
+    display: block;
+    position: relative;
+    top: -120px;
+    visibility: hidden;
   }
 }

@@ -18,6 +18,7 @@ import { reviews } from "../data";
 import ContactView from "../components/ContactView";
 import Link from "next/link";
 import Head from "next/head";
+import { useInView } from "framer-motion";
 
 const Home: React.FC = () => {
   const servicesRef = React.useRef<HTMLDivElement | null>(null);
@@ -47,10 +48,17 @@ interface ServicesSectionProps {
 }
 
 const ServicesSection: React.FC<ServicesSectionProps> = ({ servicesRef }) => {
+  const sectionInView = useInView(servicesRef, { once: true });
+
   return (
     <section
-      ref={servicesRef}
       className="flex flex-col items-center gap-8 py-8"
+      ref={servicesRef}
+      style={{
+        transform: sectionInView ? "scale(100%)" : "scale(80%)",
+        opacity: sectionInView ? 1 : 0,
+        transition: "all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s",
+      }}
     >
       <h2>Oferowane przez nas usługi</h2>
       <div className="w-full flex flex-col gap-12">
@@ -120,8 +128,17 @@ const ReviewsSection = () => {
 
   const { width } = useViewportSize();
 
+  const section = React.useRef<HTMLElement | null>(null);
+  const sectionInView = useInView(section, { once: true });
+
   return (
-    <div>
+    <section
+      ref={section}
+      style={{
+        opacity: sectionInView ? 1 : 0,
+        transition: "all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s",
+      }}
+    >
       <SwiperComponent
         autoplay
         slidesPerView={width <= 1024 ? 1 : 2}
@@ -136,7 +153,7 @@ const ReviewsSection = () => {
           </SwiperSlide>
         ))}
       </SwiperComponent>
-    </div>
+    </section>
   );
 };
 
@@ -160,7 +177,7 @@ const Review: React.FC<ReviewProps> = ({
   return (
     <div
       className={clsx(
-        "container flex flex-col w-full min-h-[16rem] h-fit max-w-lg p-6 mx-auto divide-y rounded-md bg-white divide-gray-700 transition-shadow",
+        "container flex flex-col w-full min-h-[16rem] h-fit max-w-lg p-6 mx-auto divide-y rounded-md bg-white divide-gray-300 transition-shadow",
         selected && "shadow-xl"
       )}
     >
@@ -190,8 +207,10 @@ const Review: React.FC<ReviewProps> = ({
           <span className="text-xl font-bold">{rating}</span>
         </div>
       </div>
-      <div className="p-4 space-y-2 text-sm">
-        <p className="text-center">{body}</p>
+      <div className="p-4 space-y-2 text-sm grow flex">
+        <blockquote className="grow flex items-center justify-center text-center">
+          "{body}"
+        </blockquote>
       </div>
     </div>
   );
@@ -202,6 +221,9 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ servicesRef }) => {
+  const section = React.useRef<HTMLElement | null>(null);
+  const sectionInView = useInView(section, { once: true });
+
   const [_, scrollTo] = useWindowScroll();
 
   const onReadMore = () => {
@@ -210,15 +232,30 @@ const HeroSection: React.FC<HeroSectionProps> = ({ servicesRef }) => {
   };
 
   return (
-    <section className="relative h-screen">
+    <section ref={section} className="relative h-screen">
       <Image
         src={HeroImage}
         alt="Preview of Inter-Oner"
         className="block w-full h-full object-cover object-[10%]"
       />
       <div className="z-10 absolute top-0 w-full h-full flex flex-col items-center justify-center gap-12 bg-main/80 text-window tracking-wider text-large sm:text-xl text-center p-4 bg-gradient-to-t from-primary/20">
-        <h1>Serwis pogwarancyjny samochodów</h1>
-        <main className="flex flex-col gap-4">
+        <h1
+          style={{
+            transform: sectionInView ? "none" : "translateY(100px)",
+            opacity: sectionInView ? 1 : 0,
+            transition: "all 0.6s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s",
+          }}
+        >
+          Serwis pogwarancyjny samochodów
+        </h1>
+        <main
+          style={{
+            transform: sectionInView ? "none" : "translateY(100px)",
+            opacity: sectionInView ? 1 : 0,
+            transition: "all 1.2s cubic-bezier(0.17, 0.55, 0.55, 1) 0.9s",
+          }}
+          className="flex flex-col gap-4"
+        >
           <p>
             Jedną z podstawowych specjalizacji naszej firmy jest naprawa
             elektroniki i elektryki samochodowej.
@@ -227,7 +264,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ servicesRef }) => {
             Oferujemy diagnostykę i naprawę systemów elektroniki motoryzacyjnej.
           </p>
         </main>
-        <button className="btn btn-xl" onClick={() => onReadMore()}>
+        <button
+          style={{
+            transform: sectionInView ? "none" : "translateY(100px)",
+            opacity: sectionInView ? 1 : 0,
+            transition: "all 1.2s cubic-bezier(0.17, 0.55, 0.55, 1) 1.8s",
+          }}
+          className="btn btn-xl"
+          onClick={() => onReadMore()}
+        >
           Czytaj więcej
         </button>
       </div>
