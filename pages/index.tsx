@@ -209,7 +209,7 @@ const Review: React.FC<ReviewProps> = ({
       </div>
       <div className="p-4 space-y-2 text-sm grow flex">
         <blockquote className="grow flex items-center justify-center text-center">
-          "{body}"
+          {`"${body}"`}
         </blockquote>
       </div>
     </div>
