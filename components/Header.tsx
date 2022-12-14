@@ -58,13 +58,18 @@ const Header: React.FC<Props> = ({ position, transparent }) => {
         </div>
         {/* Navbar itself */}
         <div className="flex flex-row items-center justify-between py-4">
-          {/* Logo */}
-          <div className="flex flex-row items-center gap-2">
-            <div className="w-8 h-8 text-primary">
-              <MechanicsIcon />
+          <div className="flex flex-row items-center gap-8">
+            {/* Logo */}
+            <div className="flex flex-row items-center gap-2">
+              <div className="w-8 h-8 text-primary">
+                <MechanicsIcon />
+              </div>
+              <Link href="/" className="font-black text-2xl">
+                Inter-<span className="text-primary">Oner</span>
+              </Link>
             </div>
-            <Link href="/" className="font-black text-2xl">
-              Inter-<span className="text-primary">Oner</span>
+            <Link href="/" className="link hidden lg:block font-black text-lg">
+              <span>Strona główna</span>
             </Link>
           </div>
 
@@ -86,7 +91,12 @@ const Header: React.FC<Props> = ({ position, transparent }) => {
           </button>
         </div>
         {viewMore && width <= 640 && (
-          <div className="flex flex-col gap-4 items-center py-4">{links}</div>
+          <div className="flex flex-col gap-4 items-center py-4">
+            <Link className="link" href="/uslugi">
+              STRONA GŁÓWNA
+            </Link>
+            {links}
+          </div>
         )}
       </div>
     </header>

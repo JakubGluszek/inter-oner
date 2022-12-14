@@ -18,7 +18,7 @@
   }
 
   html {
-    @apply font-inter bg-window;
+    @apply font-inter bg-window w-screen overflow-x-hidden;
   }
 
   h1,

@@ -2,18 +2,25 @@ import Image from "next/image";
 import React from "react";
 import { GiAutoRepair, GiElectric } from "react-icons/gi";
 import { RiCheckboxCircleLine } from "react-icons/ri";
+import Head from "next/head";
+import { useInView } from "framer-motion";
+
+import "swiper/css";
+import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
+import { Autoplay, Lazy, Pagination } from "swiper";
 
 import ContactView from "../components/ContactView";
 import Layout from "../components/Layout";
 
 import RegeneracjaImage from "../assets/regeneracja-tylnego-zawieszenia.png";
+import CynkowanieKolyskiImage from "../assets/cynkowanie-kolyski.jpg";
+import PiaskowanieKolyskiImage from "../assets/piaskowanie-kolyski.jpg";
 import GeometriaImage from "../assets/geometria-kol.png";
 import KlimatyzacjaImage from "../assets/klimatyzacja.png";
 
 import WheelIcon from "../components/icons/WheelIcon";
 import AirConIcon from "../components/icons/AirConIcon";
-import Head from "next/head";
-import { useInView } from "framer-motion";
+import { useViewportSize } from "@mantine/hooks";
 
 const Uslugi: React.FC = () => {
   return (
@@ -161,6 +168,9 @@ const GeometriaSection: React.FC = () => {
 };
 
 const MechanikaSection: React.FC = () => {
+  const [slideIndex, setSlideIndex] = React.useState(0);
+  const { width } = useViewportSize();
+
   const section = React.useRef<HTMLElement | null>(null);
   const sectionInView = useInView(section, { once: true });
 
@@ -169,7 +179,7 @@ const MechanikaSection: React.FC = () => {
       <a className="anchor" id="mechanika"></a>
 
       <section
-        className="flex flex-col gap-6 px-4 py-6 md:px-8 md:py-16"
+        className="flex flex-col gap-8 px-4 py-6 md:px-8 md:py-16"
         ref={section}
         style={{
           transform: sectionInView ? "none" : "translateY(100px)",
@@ -181,7 +191,7 @@ const MechanikaSection: React.FC = () => {
           <h2>Mechanika</h2>
           <GiAutoRepair size={80} />
         </div>
-        <p className="text-center text-white font-light">
+        <p className="text-center text-white font-light text-xl">
           Okresowe przeglądy i wymiana:
         </p>
         <div className="flex flex-col md:flex-row bg-white rounded shadow-lg p-4 lg:p-8">
@@ -237,20 +247,59 @@ const MechanikaSection: React.FC = () => {
             </li>
           </ul>
         </div>
-        <div className="relative rounded overflow-clip shadow-2xl">
-          <Image
-            loading="lazy"
-            src={RegeneracjaImage}
-            alt="Regeneracja tylnego zawieszenia"
-            className="block w-full h-full object-cover object-[10%]"
-          />
-          <div className="z-10 absolute top-0 w-full h-full flex flex-col items-start justify-end bg-main/40 text-window p-4 bg-gradient-to-t from-primary/20">
-            <div className="px-6 py-4 md:px-16 md:py-12 bg-main/80 rounded">
-              <span className="md:text-xl font-semibold" shadow-2xl>
-                Regeneracja tylnego zawieszenia
-              </span>
-            </div>
-          </div>
+        {/* Renegeracja tylnego zawieszenia */}
+        <div className="flex flex-col gap-4 text-window">
+          <h3>Regeneracja tylnego zawieszenia</h3>
+          <p className="text-center font-light">
+            Regeneracja tylnego zawieszenia jest ważna, ponieważ pomaga utrzymać
+            w dobrym stanie elementy układu zawieszenia, co z kolei zapewnia
+            lepszą kontrolę nad samochodem i bezpieczeństwo podczas jazdy.
+            Regularne przeprowadzanie regeneracji zawieszenia pozwala też
+            uniknąć kosztownych napraw w przyszłości. Ponadto, regeneracja
+            zawieszenia może poprawić ogólną wydajność samochodu i zwiększyć
+            jego komfort jazdy.
+          </p>
+          <span className="text-center">
+            <p className="font-semibold">W skład naszych usług wchodzą:</p>{" "}
+            Demontaż belki tylnego zawieszenia, piaskowanie, cynkowanie oraz
+            montaż nowych tuleji.
+          </span>
+          <SwiperComponent
+            autoplay
+            lazy
+            preloadImages={false}
+            slidesPerView={width >= 1048 ? 2 : 1}
+            modules={[Pagination, Autoplay, Lazy]}
+            centeredSlides
+            spaceBetween={32}
+            onSlideChange={(a) => setSlideIndex(a.activeIndex)}
+            className="w-full flex flex-row"
+          >
+            <SwiperSlide key={0}>
+              <Image
+                loading="lazy"
+                src={CynkowanieKolyskiImage}
+                alt="Cynkowanie kołyski"
+                className="block w-full h-full object-cover rounded shadow-lg brightness-75"
+              />
+            </SwiperSlide>
+            <SwiperSlide key={1} className="my-auto">
+              <Image
+                loading="lazy"
+                src={RegeneracjaImage}
+                alt="Regeneracja tylnego zawieszenia"
+                className="block my-auto w-full h-full object-cover rounded shadow-lg brightness-75"
+              />
+            </SwiperSlide>
+            <SwiperSlide key={2}>
+              <Image
+                loading="lazy"
+                src={PiaskowanieKolyskiImage}
+                alt="Piaskowanie kołyski"
+                className="block w-full h-full object-cover rounded shadow-lg brightness-75"
+              />
+            </SwiperSlide>
+          </SwiperComponent>
         </div>
       </section>
     </>

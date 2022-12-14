@@ -1,8 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import Tilt from "react-parallax-tilt";
+import Link from "next/link";
+import Head from "next/head";
 import { GiAutoRepair, GiElectric } from "react-icons/gi";
 import { useViewportSize } from "@mantine/hooks";
+import Tilt from "react-parallax-tilt";
+import { useInView } from "framer-motion";
 import clsx from "clsx";
 
 import "swiper/css";
@@ -16,9 +19,6 @@ import WheelIcon from "../components/icons/WheelIcon";
 import AirConIcon from "../components/icons/AirConIcon";
 import { reviews } from "../data";
 import ContactView from "../components/ContactView";
-import Link from "next/link";
-import Head from "next/head";
-import { useInView } from "framer-motion";
 
 const Home: React.FC = () => {
   const servicesRef = React.useRef<HTMLDivElement | null>(null);
