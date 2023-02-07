@@ -6,7 +6,7 @@ const Document = () => {
       <Head>
         <meta
           name="google-site-verification"
-          content="7QPRR4rGCp-mOw0KEFF5iCeJbiTKEo7POqBwXguUY7c"
+          content="dBIvSiYiBUUkug3CFQ_f45bVw1eSHJkmlYlfh_jwAQ0"
         />
         <meta
           name="description"
